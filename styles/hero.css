@@ -1,0 +1,117 @@
+.hero {
+  height: 36px;
+  width: 21px;
+  position: absolute;
+  transform: translate3d(30px,130px,0);
+  background-color: transparent;
+  background-image: url("../assets/ninja/stand-left5.png");
+}
+.hero.stand-left {
+  background-image: url("../assets/ninja/stand-left5.png")
+}
+.hero.stand-right {
+  background-image: url("../assets/ninja/stand-right4.png")
+}
+.hero.walk-left {
+  background-image: url("../assets/ninja/walk-left2.png");
+  animation: walk .4s steps(8) infinite;
+}
+.hero.walk-right {
+  background-image: url("../assets/ninja/walk-right3.png");
+  animation: walk .4s steps(8) infinite;
+}
+.hero.run-right {
+  background-image: url("../assets/ninja/run-right5.png");
+  animation: run .5s steps(16) infinite;
+}
+.hero.run-left {
+  background-image: url("../assets/ninja/run-left5.png");
+  animation: run .5s steps(16) infinite;
+}
+.hero.jump-right {
+  background-image: url("../assets/ninja/jump-right.png")
+}
+.hero.fall-right {
+  background-image: url("../assets/ninja/fall-right3.png")
+}
+.hero.hang-right {
+  background-image: url("../assets/ninja/hang-right.png")
+}
+.hero.jump-left {
+  background-image: url("../assets/ninja/jump-left.png")
+}
+.hero.fall-left {
+  background-image: url("../assets/ninja/fall-left.png")
+}
+.hero.hang-left {
+  background-image: url("../assets/ninja/hang-left.png")
+}
+.hero.climb-left {
+  background-image: url("../assets/ninja/climb-left.png")
+}
+.hero.climb-right {
+  background-image: url("../assets/ninja/climb-right.png")
+}
+.hero.climb-up-left {
+  background-image: url("../assets/ninja/climb-up-left2.png");
+  animation: climb .7s steps(5) infinite;
+}
+.hero.climb-up-right {
+  background-image: url("../assets/ninja/climb-up-right6.png");
+  animation: climb .7s steps(5) infinite;
+}
+.hero.swing-left {
+  background-image: url("../assets/ninja/swing-left2.png");
+  animation: swing .9s steps(6) infinite;
+}
+.hero.swing-right {
+  background-image: url("../assets/ninja/swing-right2.png");
+  animation: swing .9s steps(6) infinite;
+}
+
+@keyframes walk {
+  100% { background-position: -168px; }
+}
+@keyframes run {
+  100% { background-position: -336px; }
+}
+@keyframes climb {
+  100% { background-position: -105px; }
+}
+@keyframes swing {
+  100% { background-position: -126px; }
+}
+
+.baddie {
+  height: 36px;
+  width: 21px;
+  background: url("../assets/guard/stand-left4.png");
+  position: absolute;
+  transform: translate3d(0,0,0);
+}
+.baddie.stand-left {
+  background-image: url("../assets/guard/stand-left4.png")
+}
+.baddie.stand-right {
+  background-image: url("../assets/guard/stand-right4.png")
+}
+.baddie.walk-left {
+  background-image: url("../assets/guard/walk-left2.png");
+  animation: walk7 .5s steps(7) infinite;
+}
+.baddie.walk-right {
+  background-image: url("../assets/guard/walk-right2.png");
+  animation: walk7 .5s steps(7) infinite;
+}
+.baddie.run-right {
+  background-image: url("../assets/guard/run-right.png");
+  animation: run .6s steps(16) infinite;
+}
+.baddie.run-left {
+  background-image: url("../assets/guard/run-left.png");
+  animation: run .6s steps(16) infinite;
+}
+
+@keyframes walk7 {
+  100% { background-position: -147px; }
+}

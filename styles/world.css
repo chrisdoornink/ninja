@@ -1,0 +1,40 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ddd;
+}
+
+#world {
+  width: 1200px;
+  height: 600px;
+  /*border-bottom: 3px solid black;*/
+  position: relative;
+  margin: 0px auto;
+  overflow: hidden;
+  /*background: linear-gradient(to bottom, #7da7be, #878cb1); //dusk*/
+  background: linear-gradient(to bottom, #9be2fe 0%, #67d1fb 70%); //day
+  /*background: linear-gradient(to bottom, #244970, #ae9d4e); //nighttime*/
+}
+#background div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 2000px;
+  background-position: 0 0;
+}
+
+.solid {
+  background: #333;
+  position: absolute;
+}
+
+.sticky-right {
+  border-right: 2px solid #040
+}
+.sticky-left {
+  border-left: 2px solid #040
+}
+.sticky-bottom {
+  border-bottom: 2px solid #040
+}
