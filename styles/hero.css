@@ -5,6 +5,7 @@
   transform: translate3d(30px,130px,0);
   background-color: transparent;
   background-image: url("../assets/ninja/stand-left5.png");
+  z-index: 1;
 }
 .hero.stand-left {
   background-image: url("../assets/ninja/stand-left5.png")
@@ -68,6 +69,16 @@
   background-image: url("../assets/ninja/swing-right2.png");
   animation: swing .9s steps(6) infinite;
 }
+.hero.hide {
+  background-image: url("../assets/ninja/hide1.png");
+  background-repeat: no-repeat;
+  animation: hide .3s steps(5) forwards;
+}
+.hero.reveal {
+  background-image: url("../assets/ninja/reveal.png");
+  background-repeat: no-repeat;
+  animation: reveal .3s steps(4) forwards;
+}
 
 @keyframes walk {
   100% { background-position: -168px; }
@@ -80,6 +91,14 @@
 }
 @keyframes swing {
   100% { background-position: -126px; }
+}
+@keyframes hide {
+  from { background-position: 0; }
+  to { background-position: -105px; }
+}
+@keyframes reveal {
+  from { background-position: 0; }
+  to { background-position: -84px; }
 }
 
 .baddie {
@@ -111,7 +130,21 @@
   background-image: url("../assets/guard/run-left.png");
   animation: run .6s steps(16) infinite;
 }
+.baddie.sleep {
+  background-image: url("../assets/guard/sleeping1.png");
+}
 
 @keyframes walk7 {
   100% { background-position: -147px; }
+}
+
+.sleep-zs {
+  width: 24px;
+  height: 34px;
+  background-image: url("../assets/global/3Zs.png");
+  animation: zs 3s steps(27) infinite;
+}
+
+@keyframes zs {
+  100% { background-position: -648px; }
 }

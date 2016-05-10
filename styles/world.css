@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #ddd;
+  background: #1a1f13;
 }
 
 #world {
@@ -14,8 +14,9 @@ html, body {
   /*background: linear-gradient(to bottom, #7da7be, #878cb1); //dusk*/
   background: linear-gradient(to bottom, #9be2fe 0%, #67d1fb 70%); //day
   /*background: linear-gradient(to bottom, #244970, #ae9d4e); //nighttime*/
+  transform: translate3d(0,0,0);
 }
-#background div {
+#background div, #foreground div {
   position: absolute;
   top: 0;
   left: 0;
@@ -23,10 +24,27 @@ html, body {
   width: 2000px;
   background-position: 0 0;
 }
-
-.solid {
-  background: #333;
+#world > div {
   position: absolute;
+  transform: translate3d(0,0,0);
+  height: 100%;
+  width: 100%;
+}
+#world div {
+  position: absolute;
+}
+
+
+.ledge {
+  background: #333;
+}
+
+.blind {
+  background: rgba(0,0,0,1);
+}
+
+.ledge, .blind {
+  display: none;
 }
 
 .sticky-right {
@@ -37,4 +55,20 @@ html, body {
 }
 .sticky-bottom {
   border-bottom: 2px solid #040
+}
+
+#background .fire {
+  animation: fire .6s steps(8) infinite;
+}
+
+@keyframes fire {
+  100% { background-position: -1600px; }
+}
+
+#background .drawbridge.lower {
+  animation: drawbridgeLower 2s steps(12) forwards;
+}
+
+@keyframes drawbridgeLower {
+  100% { background-position: -5208px; }
 }

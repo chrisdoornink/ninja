@@ -1,7 +1,7 @@
 class Landscape {
   constructor(id, classes, pos) {
     this.name = id
-    solids.push(this)
+
     this.position = {x:0, y:0}
     this.height = parseInt(pos.height.replace('px', ''))
     this.width = parseInt(pos.width.replace('px', ''))
@@ -9,12 +9,21 @@ class Landscape {
     div.id = id
     div.className = classes
     document.getElementById("landscape").appendChild(div);
+    this.isSolid = div.classList.contains('solid')
+    this.isBlind = div.classList.contains('blind')
     this.isStickyRight = div.classList.contains('sticky-right')
     this.isStickyLeft = div.classList.contains('sticky-left')
     this.isStickyBottom = div.classList.contains('sticky-bottom')
     this.isJumpThrough = div.classList.contains('jump-through')
     this.isDeathLeft = div.classList.contains('death-left')
     this.isDeathRight = div.classList.contains('death-right')
+    this.isNextSceneTrigger = div.classList.contains('next-scene')
+    if (this.isSolid) {
+      solids.push(this)
+    }
+    if (this.isBlind) {
+      blinds.push(this)
+    }
     if (pos.bottom) {
       div.style.bottom = pos.bottom
       this.position.y = world.height - parseInt(pos.bottom.replace('px', '')) - this.height
@@ -30,6 +39,9 @@ class Landscape {
     if (pos.left) {
       div.style.left = pos.left
       this.position.x = parseInt(pos.left.replace('px', ''))
+    }
+    if (pos.action) {
+      this.action = pos.action
     }
     div.style.width = pos.width
     div.style.height = pos.height

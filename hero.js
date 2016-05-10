@@ -20,4 +20,29 @@ class Hero extends MovableObject {
     Mousetrap.bind('shift', () => { this.maxSpeed = this.runSpeed })
     Mousetrap.bind('shift', () => { this.maxSpeed = this.walkSpeed }, 'keyup')
   }
+  makeStops(stop, solid) {
+    super.makeStops(stop, solid)
+
+    if (solid.isNextSceneTrigger) {
+      console.log('hello!!!!');
+      if (this.sceneChangeFlag) { return }
+      this.sceneChangeFlag = true
+      level.nextScene()
+    }
+
+  }
+  collisionDetection() {
+    this.inBlind = false
+    super.collisionDetection()
+    for (var i=0, len = blinds.length; i < len; i++) {
+      var blind = blinds[i]
+      let p1 = blind.coordinates || this.getCoordinates(blind)
+      let p2 = this.coordinates || this.getCoordinates(this)
+      let it = {left: p1[0][0],right: p1[0][1],top: p1[1][0],bottom: p1[1][1]}
+      let me = {left: p2[0][0],right: p2[0][1],top: p2[1][0],bottom: p2[1][1]}
+      if (me.right >= it.left && me.left <= it.right && me.bottom >= it.top && me.top <= it.bottom) {
+        this.inBlind = true
+      }
+    }
+  }
 }

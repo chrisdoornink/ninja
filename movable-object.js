@@ -5,7 +5,7 @@ class MovableObject {
     this.div = document.createElement("DIV")
     this.div.id = id
     this.div.className = classes
-    document.getElementById("landscape").appendChild(this.div);
+    document.getElementById("characters").appendChild(this.div);
     this.height = this.div.clientHeight
     this.width = this.div.clientWidth
 
@@ -15,9 +15,27 @@ class MovableObject {
     this.setPosition({x:x,y:y})
     this.start()
   }
+  ceaseToExistPlease() {
+    this.ceasesToExist = true
+    document.getElementById(this.name).remove()
+    if (this.sleepDiv && this.sleepDiv.id && document.getElementById(this.sleepDiv.id)) {
+      document.getElementById(this.sleepDiv.id).remove();
+    }
+    this.canSee = false
+    this.attackMode = false
+    this.position = {x: -1000, y: -1000}
+    this.velocity = {x:0, y:0}
+    this.setPosition()
+  }
+  reset() {
+    this.init(this.name, this.initialPosition.x, this.initialPosition.y)
+    this.setPosition({x:this.initialPosition.x,y:this.initialPosition.y})
+    this.start()
+  }
   init(id, x, y) {
     this.name = id
     this.position = {x:x,y:y}
+    this.initialPosition = this.position
     this.gravityMax = 8
     this.gravityVelocity = 0.5
     this.velocity = {x: 0, y: 0}
@@ -49,8 +67,13 @@ class MovableObject {
     //   this.check = true
     // }
   }
+  moveToStart() {
+    this.position.x = 50
+    this.position.y = 510
+    this.div.style.transform = 'translate3d('+(this.position.x)+'px,'+this.position.y+'px,0)'
+  }
   gravity() {
-    if (this.gravityFlag) { return }
+    if (this.gravityFlag || this.ceasesToExist) { return }
     this.gravityFlag = true
     setTimeout(() => {
       this.gravityFlag = false
@@ -76,7 +99,7 @@ class MovableObject {
     }, this.framerate)
   }
   collisionDetection() {
-
+    if (this.ceasesToExist) { return }
     let closestEyeLineSolid = null
     let closestKneeLineSolid = null
 
@@ -97,6 +120,9 @@ class MovableObject {
         }
         if (stop.kneeLine && (!closestKneeLineSolid || this.closer(solid, closestKneeLineSolid))) {
           closestKneeLineSolid = solid
+        }
+        if (stop.ear) {
+          this.hear(solid)
         }
       }
     }
@@ -129,7 +155,7 @@ class MovableObject {
     let myEyes = me.top + (me.bottom - me.top) * 0.2
     let myKnees = me.bottom - (me.bottom - me.top) * 0.2
 
-    let stop = {none: true, left: false, right: false, top: false, bottom: false, eyeLine: false, kneeLine: false}
+    let stop = {none: true, left: false, right: false, top: false, bottom: false, eyeLine: false, kneeLine: false, ear: false}
     if (me.right >= it.left && me.left <= it.right && me.bottom >= it.top && me.top <= it.bottom) {
       if (me.left <= it.right && (me.left > it.left || me.right > it.right) && me.bottom >= (it.top + 11)) {
         stop.left = it.right
@@ -167,6 +193,11 @@ class MovableObject {
         }
       }
     }
+    if (this.canHear) {
+      if (me.left - it.left < 50 && me.left - it.left > -50 && me.top - it.top < 50 && me.top - it.top > -50) {
+        stop.ear = true
+      }
+    }
     let feet = this.height + this.position.y
     if (!stop.left && !stop.right && !stop.top && !stop.bottom && feet < floor) {
       this.grounded = false
@@ -180,6 +211,7 @@ class MovableObject {
   makeStops(stop, solid) {
     // console.log(stop);
     // jump up into an object
+    if (solid.hidden) { return }
     if (!solid.isJumpThrough && stop.top && !stop.bottom && (this.velocity.y < 0 || solid.isStickyBottom)) {
       this.velocity.y = 0
       if (solid.isStickyBottom && this.climber) {
@@ -189,7 +221,13 @@ class MovableObject {
       }
     }
     //land on an object
-    if (stop.bottom && !stop.top && this.velocity.y >= 0 && !this.climbing) {
+
+    if (stop.bottom && !stop.top && this.velocity.y >= 0) {
+      if (this.climbing) {
+        this.climbing = false
+        this.climbingDown = false
+        this.climbingMoving = false
+      }
       this.velocity.y = 0
       this.position.y = stop.bottom
       this.onALedge = true
@@ -223,10 +261,14 @@ class MovableObject {
         if (stop.left) {
           this.position.x = stop.left - this.width
         } else {
-          this.position.x = stop.right
+          this.position.x = stop.right + this.width
         }
-        this.position.y = this.position.y - this.height
+        this.position.y = this.position.y - this.height + 30
+        this.climbedOverLedge = true
       }
+    }
+    if (solid.action) {
+      level.scenes[level.currentScene][solid.action](solid)
     }
   }
   closer(el1, el2) {
@@ -240,7 +282,7 @@ class MovableObject {
     }
   }
   leftStart(run) {
-    if (this.moving != 'left') {
+    if (this.moving != 'left' && !this.hidden) {
       this.moving = 'left'
       this.facing = 'left'
       this.changeAnimation()
@@ -279,7 +321,7 @@ class MovableObject {
   }
   rightStart() {
     //explore other key press options, for smoother animation
-    if (this.moving != 'right') {
+    if (this.moving != 'right' && !this.hidden) {
       this.moving = 'right'
       this.facing = 'right'
       this.changeAnimation()
@@ -336,11 +378,14 @@ class MovableObject {
     }, this.framerate)
   }
   jump() {
+    if (this.climbedOverLedge) {
+      return
+    }
     if (this.climbing) {
       if (!this.climbingMoving) {
         this.climbUp()
       }
-    } else if (this.grounded) {
+    } else if (this.grounded && !this.hidden) {
       this.grounded = false
       this.velocity.y = -this.jumpPower
       this.position.y = this.position.y - 5
@@ -363,6 +408,7 @@ class MovableObject {
     }
   }
   climbStop() {
+    this.climbedOverLedge = false
     this.climbingMoving = false
     this.climbingUp = false
     this.climbingDown = false
@@ -378,19 +424,47 @@ class MovableObject {
       this.position.y = this.position.y + 3
       this.setPosition()
     }
+    if (this.inBlind && this.grounded) {
+      if (this.hidden) {
+        this.revealing = true
+        this.reveal()
+      } else {
+        this.hidden = true
+        this.hide()
+      }
+    }
+  }
+  hide() {
+    this.changeAnimation()
+  }
+  reveal() {
+    this.changeAnimation()
+    setTimeout(() => {
+      this.revealing = false
+      this.hidden = false
+      this.changeAnimation()
+    }, 200)
   }
   climbDown() {
     if (this.climbing) {
-      this.position.y = this.position.y + 1
-      this.setPosition()
-      this.changeAnimation()
-      this.climbingMoving = true
-      this.climbingDown = true
-      setTimeout(() => {
-        if (this.climbingMoving) {
-          this.climbDown()
-        }
-      }, this.framerate)
+      let feet = this.height + this.position.y
+      if (feet >= floor) {
+        this.climbing = false
+        this.climbingDown = false
+        this.climbingMoving = false
+        this.changeAnimation()
+      } else {
+        this.position.y = this.position.y + 1
+        this.setPosition()
+        this.changeAnimation()
+        this.climbingMoving = true
+        this.climbingDown = true
+        setTimeout(() => {
+          if (this.climbingMoving) {
+            this.climbDown()
+          }
+        }, this.framerate)
+      }
     }
   }
   changeAnimation() {
@@ -425,6 +499,19 @@ class MovableObject {
       animation += '-left'
     } else {
       animation += '-right'
+    }
+    if (this.sleeping) {
+      animation = 'sleep'
+    }
+    if (this.hidden) {
+      if (this.revealing) {
+        animation = 'reveal'
+        setTimeout(() => {
+          this.changeAnimation()
+        }, 300)
+      } else {
+        animation = 'hide'
+      }
     }
     if (this.animation != animation) {
       this.div.classList.remove(this.animation)

@@ -30,6 +30,9 @@ class Background {
       this.stop = false
       this.sidescroll()
     }
+    if (options.animationClass) {
+      this.div.classList = options.animationClass
+    }
     if (options.movement == 'roll') {
       this.initialPositionx = this.position.x
       this.initialPositiony = this.position.y
@@ -64,5 +67,10 @@ class Background {
         this.roll()
       }, this.framerate)
     }
+  }
+  slideLeft() {
+    this.position.x = this.position.x - 1200
+    this.div.style.transition = 'transform 2s ease-in-out'
+    this.div.style.transform = 'translate3d('+(this.position.x)+'px,'+this.position.y+'px,0)'
   }
 }
