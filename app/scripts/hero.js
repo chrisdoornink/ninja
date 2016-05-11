@@ -22,14 +22,11 @@ class Hero extends MovableObject {
   }
   makeStops(stop, solid) {
     super.makeStops(stop, solid)
-
     if (solid.isNextSceneTrigger) {
-      console.log('hello!!!!');
       if (this.sceneChangeFlag) { return }
       this.sceneChangeFlag = true
       level.nextScene()
     }
-
   }
   collisionDetection() {
     this.inBlind = false

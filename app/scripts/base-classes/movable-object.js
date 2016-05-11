@@ -179,16 +179,16 @@ class MovableObject {
     }
     if (this.canSee) {
       if (this.facing == 'left') {
-        if (myEyes <= it.bottom && myEyes >= it.top && me.left > it.right) {
+        if (myEyes <= it.bottom && myEyes >= it.top && me.left > it.left) {
           stop.eyeLine = true
-        } else if (myKnees <= it.bottom && myKnees >= it.top && me.left > it.right) {
+        } else if (myKnees <= it.bottom && myKnees >= it.top && me.left > it.left) {
           stop.kneeLine = true
         }
       }
       if (this.facing == 'right') {
-        if (myEyes <= it.bottom && myEyes >= it.top && me.right < it.left) {
+        if (myEyes <= it.bottom && myEyes >= it.top && me.right < it.right) {
           stop.eyeLine = true
-        } else if (myKnees <= it.bottom && myKnees >= it.top && me.right < it.left) {
+        } else if (myKnees <= it.bottom && myKnees >= it.top && me.right < it.right) {
           stop.kneeLine = true
         }
       }
