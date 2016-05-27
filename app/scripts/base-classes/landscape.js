@@ -11,6 +11,7 @@ class Landscape {
     document.getElementById("landscape").appendChild(div);
     this.isSolid = div.classList.contains('solid')
     this.isBlind = div.classList.contains('blind')
+    this.isActionItem = div.classList.contains('action-item')
     this.isStickyRight = div.classList.contains('sticky-right')
     this.isStickyLeft = div.classList.contains('sticky-left')
     this.isStickyBottom = div.classList.contains('sticky-bottom')
@@ -23,6 +24,9 @@ class Landscape {
     }
     if (this.isBlind) {
       blinds.push(this)
+    }
+    if (this.isBlind) {
+      actionItems.push(this)
     }
     if (pos.bottom) {
       div.style.bottom = pos.bottom

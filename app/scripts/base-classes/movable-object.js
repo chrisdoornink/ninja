@@ -72,6 +72,24 @@ class MovableObject {
     this.position.y = 510
     this.div.style.transform = 'translate3d('+(this.position.x)+'px,'+this.position.y+'px,0)'
   }
+  landingDeathCheck() {
+    if (this.position.y - this.startedFalling > 300) {
+      this.die('gravity')
+    }
+    this.startedFalling = null
+  }
+  pause() {
+    this.paused = {velocity: this.velocity}
+    this.velocity = {x: 0, y: 0}
+    this.stop()
+    //need to do alot more here..
+  }
+  resume() {
+    //undo all that gets done above..
+  }
+  die() {
+    return
+  }
   gravity() {
     if (this.gravityFlag || this.ceasesToExist) { return }
     this.gravityFlag = true
@@ -82,12 +100,17 @@ class MovableObject {
 
         let feet = this.height + this.position.y
         if (feet < floor) {
+          if (!this.startedFalling && this.velocity.y > 0) {
+            this.startedFalling = this.position.y
+          }
           this.velocity.y = this.velocity.y >= 7 ? 7 : this.velocity.y + .4
           this.position.y = this.position.y + this.velocity.y
           this.setPosition()
         } else {
           this.position.y = this.position.y + (floor - feet)
           this.setPosition()
+          this.velocity.y = 0
+          this.landingDeathCheck()
           this.grounded = true
         }
       } else {
@@ -99,7 +122,7 @@ class MovableObject {
     }, this.framerate)
   }
   collisionDetection() {
-    if (this.ceasesToExist) { return }
+    if (this.ceasesToExist || this.dead) { return }
     let closestEyeLineSolid = null
     let closestKneeLineSolid = null
 
@@ -194,7 +217,7 @@ class MovableObject {
       }
     }
     if (this.canHear) {
-      if (me.left - it.left < 50 && me.left - it.left > -50 && me.top - it.top < 50 && me.top - it.top > -50) {
+      if (me.left - it.left < 70 && me.left - it.left > -70 && me.top - it.top < 70 && me.top - it.top > -70) {
         stop.ear = true
       }
     }
@@ -227,6 +250,9 @@ class MovableObject {
         this.climbing = false
         this.climbingDown = false
         this.climbingMoving = false
+      }
+      if (this.velocity.y > 0) {
+        this.landingDeathCheck()
       }
       this.velocity.y = 0
       this.position.y = stop.bottom
@@ -358,6 +384,11 @@ class MovableObject {
     }
     this.stop()
   }
+  suddenStop() {
+    this.velocity.x = 0
+    this.moving = false
+    this.stop()
+  }
   stop() {
     setTimeout(() => {
       let x = this.velocity.x
@@ -414,6 +445,7 @@ class MovableObject {
     this.climbingDown = false
   }
   down() {
+    //object action check here???
     if (this.climbing) {
       if (!this.climbingMoving) {
         this.climbDown()
@@ -433,8 +465,24 @@ class MovableObject {
         this.hide()
       }
     }
+    let objs = actionItems
+    for (var i=0, len = objs.length; i < len; i++) {
+      var solid = objs[i]
+      if (solid != this) {
+        let pos = solid.coordinates || this.getCoordinates(solid)
+        let pos2 = this.coordinates || this.getCoordinates(this)
+        let touching = this.compareCoordinates(pos,pos2)
+        if (!touching.none) {
+          console.log('touching', solid);
+
+        }
+      }
+    }
   }
   hide() {
+    this.velocity.x = 0
+    this.moving = false
+    this.stop()
     this.changeAnimation()
   }
   reveal() {

@@ -4,36 +4,36 @@
   position: absolute;
   transform: translate3d(30px,130px,0);
   background-color: transparent;
-  background-image: url("assets/ninja/stand-left5.png");
+  background-image: url("assets/ninja/stand-left.png");
   z-index: 1;
 }
 .hero.stand-left {
-  background-image: url("assets/ninja/stand-left5.png")
+  background-image: url("assets/ninja/stand-left.png")
 }
 .hero.stand-right {
-  background-image: url("assets/ninja/stand-right4.png")
+  background-image: url("assets/ninja/stand-right.png")
 }
 .hero.walk-left {
-  background-image: url("assets/ninja/walk-left2.png");
+  background-image: url("assets/ninja/walk-left.png");
   animation: walk .4s steps(8) infinite;
 }
 .hero.walk-right {
-  background-image: url("assets/ninja/walk-right3.png");
+  background-image: url("assets/ninja/walk-right.png");
   animation: walk .4s steps(8) infinite;
 }
 .hero.run-right {
-  background-image: url("assets/ninja/run-right5.png");
+  background-image: url("assets/ninja/run-right.png");
   animation: run .5s steps(16) infinite;
 }
 .hero.run-left {
-  background-image: url("assets/ninja/run-left5.png");
+  background-image: url("assets/ninja/run-left.png");
   animation: run .5s steps(16) infinite;
 }
 .hero.jump-right {
   background-image: url("assets/ninja/jump-right.png")
 }
 .hero.fall-right {
-  background-image: url("assets/ninja/fall-right3.png")
+  background-image: url("assets/ninja/fall-right.png")
 }
 .hero.hang-right {
   background-image: url("assets/ninja/hang-right.png")
@@ -54,23 +54,23 @@
   background-image: url("assets/ninja/climb-right.png")
 }
 .hero.climb-up-left {
-  background-image: url("assets/ninja/climb-up-left2.png");
+  background-image: url("assets/ninja/climb-up-left.png");
   animation: climb .7s steps(5) infinite;
 }
 .hero.climb-up-right {
-  background-image: url("assets/ninja/climb-up-right6.png");
+  background-image: url("assets/ninja/climb-up-right.png");
   animation: climb .7s steps(5) infinite;
 }
 .hero.swing-left {
-  background-image: url("assets/ninja/swing-left2.png");
+  background-image: url("assets/ninja/swing-left.png");
   animation: swing .9s steps(6) infinite;
 }
 .hero.swing-right {
-  background-image: url("assets/ninja/swing-right2.png");
+  background-image: url("assets/ninja/swing-right.png");
   animation: swing .9s steps(6) infinite;
 }
 .hero.hide {
-  background-image: url("assets/ninja/hide1.png");
+  background-image: url("assets/ninja/hide.png");
   background-repeat: no-repeat;
   animation: hide .3s steps(5) forwards;
 }
@@ -104,22 +104,22 @@
 .baddie {
   height: 36px;
   width: 21px;
-  background: url("assets/guard/stand-left4.png");
+  background: url("assets/guard/stand-left.png");
   position: absolute;
   transform: translate3d(0,0,0);
 }
 .baddie.stand-left {
-  background-image: url("assets/guard/stand-left4.png")
+  background-image: url("assets/guard/stand-left.png")
 }
 .baddie.stand-right {
-  background-image: url("assets/guard/stand-right4.png")
+  background-image: url("assets/guard/stand-right.png")
 }
 .baddie.walk-left {
-  background-image: url("assets/guard/walk-left2.png");
+  background-image: url("assets/guard/walk-left.png");
   animation: walk7 .5s steps(7) infinite;
 }
 .baddie.walk-right {
-  background-image: url("assets/guard/walk-right2.png");
+  background-image: url("assets/guard/walk-right.png");
   animation: walk7 .5s steps(7) infinite;
 }
 .baddie.run-right {
@@ -131,7 +131,7 @@
   animation: run .6s steps(16) infinite;
 }
 .baddie.sleep {
-  background-image: url("assets/guard/sleeping1.png");
+  background-image: url("assets/guard/sleeping.png");
 }
 
 @keyframes walk7 {

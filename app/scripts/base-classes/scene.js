@@ -3,6 +3,7 @@ class Scene{
     this.ledges = []
     this.baddies = []
     this.sceneBackgrounds = []
+    this.actionItems= []
   }
   tearDown() {
     for (var i = 0; i < this.ledges.length; i++) {
@@ -15,7 +16,14 @@ class Scene{
       this.sceneBackgrounds[i] = null
     }
     this.sceneBackgrounds = []
+    for (var i = 0; i < this.actionItems.length; i++) {
+      document.getElementById(this.actionItems[i].name).remove()
+      this.actionItems[i] = null
+    }
+    this.actionItems = []
     solids = [hero]
+    blinds = []
+    actionItems = []
     hero.moveToStart()
     for (var i = 0; i < this.baddies.length; i++) {
       this.baddies[i].ceaseToExistPlease()

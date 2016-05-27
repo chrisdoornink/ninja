@@ -36,11 +36,21 @@ html, body {
 
 
 .ledge {
+  background: #777;
+}
+.solid.ledge {
   background: #333;
 }
 
 .blind {
-  background: rgba(0,0,0,1);
+  background: green;
+}
+
+.bucket {
+  background: red;
+}
+.washed-item {
+  background: brown;
 }
 
 .ledge, .blind {
