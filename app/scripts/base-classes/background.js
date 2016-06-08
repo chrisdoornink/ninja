@@ -20,7 +20,9 @@ class Background {
     // if (options.width && options.height) {
     //   this.div.style.backgroundSize = this.width + 'px ' + this.height + 'px'
     // }
-    this.div.style.backgroundSize = 'cover'
+    if (!options.actualSize) {
+      this.div.style.backgroundSize = 'cover'
+    }
     if (options.opacity) {
       this.div.style.opacity = options.opacity
     }
