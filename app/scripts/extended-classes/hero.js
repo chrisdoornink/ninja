@@ -1,4 +1,4 @@
-class Hero extends MovableObject {
+class Hero extends Character {
   init(id, x, y) {
     super.init(id, x, y)
     this.walkSpeed = 0.6
@@ -21,7 +21,7 @@ class Hero extends MovableObject {
     Mousetrap.bind('shift', () => { this.maxSpeed = this.walkSpeed }, 'keyup')
   }
   die(killer) {
-    console.log('killed by ', killer);
+    report.send('death', {character: 'hero', killer: killer})
     level.restartScene(killer)
   }
   makeStops(stop, solid) {

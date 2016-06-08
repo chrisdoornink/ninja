@@ -1,4 +1,4 @@
-class Baddie extends MovableObject {
+class Baddie extends Character {
   init(id, x, y, options = {}) {
     super.init(id, x, y)
     this.walkSpeed = 0.7
@@ -66,7 +66,7 @@ class Baddie extends MovableObject {
     }
   }
   die(killer) {
-    console.log('soldier death by', killer);
+    report.send('death', {character: this.name, killer: killer});
     this.dead = true
     this.canSee = false
     this.canHear = false
@@ -108,6 +108,7 @@ class Baddie extends MovableObject {
     this.changeAnimation()
     this.setPosition()
     this.patrol()
+    report.send('Wake Up', {character: this.name});
   }
   collisionDetection() {
     super.collisionDetection()
@@ -186,9 +187,12 @@ class Baddie extends MovableObject {
     this.see(obj)
   }
   attack(obj) {
-    this.maxSpeed = this.runSpeed
-    this.attackMode = true
-    this.pursue(obj)
+    if (!this.attackMode) {
+      this.maxSpeed = this.runSpeed
+      this.attackMode = true
+      this.pursue(obj)
+      report.send('Attack', {character: this.name});
+    }
   }
   pursue(obj) {
     if (this.pursueFlag) { return }

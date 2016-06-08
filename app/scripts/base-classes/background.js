@@ -14,9 +14,13 @@ class Background {
     }
     this.div.style.backgroundImage = 'url("assets/background/'+image+'.png")'
     this.width = options.width || 1200
-    this.height = options.height || 1200
+    this.height = options.height || 600
     this.div.style.width = this.width + 'px'
     this.div.style.height = this.height + 'px'
+    // if (options.width && options.height) {
+    //   this.div.style.backgroundSize = this.width + 'px ' + this.height + 'px'
+    // }
+    this.div.style.backgroundSize = 'cover'
     if (options.opacity) {
       this.div.style.opacity = options.opacity
     }

@@ -4,12 +4,20 @@ class Level {
     this.start()
   }
   start() {
+    this.sceneAttempt = 1
     this.scenes[this.currentScene].build()
     this.preloadCharacterSprites()
+    setTimeout(function () {
+      report.send('Level Started', {restart: false})
+      report.send('Scene Started', {restart: false})
+    }, 1000);
   }
   nextScene() {
+    report.send('Scene Completed', {attempts: this.sceneAttempt})
     this.scenes[this.currentScene].tearDown()
     this.currentScene =+ 1
+    this.sceneAttempt = 1
+    report.send('Scene Started', {restart: false})
     this.scenes[this.currentScene].build()
   }
   previousScene() {
@@ -17,6 +25,8 @@ class Level {
     this.currentScene =- 1
   }
   restartScene() {
+    this.sceneAttempt =+ 1
+    report.send('Scene Started', {restart: true, attempt: this.sceneAttempt})
     this.scenes[this.currentScene].tearDown()
     this.scenes[this.currentScene].build()
   }
