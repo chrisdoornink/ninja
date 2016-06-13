@@ -49,6 +49,9 @@ html, body {
 .bucket {
   background: red;
 }
+.bucket.knocked-over {
+  background: green;
+}
 .washed-item {
   background: brown;
 }
@@ -57,14 +60,21 @@ html, body {
   display: none;
 }
 
+#world.devblocks #landscape {
+  background: #555;
+}
+#world.devblocks #landscape .ledge, #world.devblocks #landscape .blind {
+  display: block;
+}
+
 .sticky-right {
-  border-right: 2px solid #040
+  border-right: 2px solid green
 }
 .sticky-left {
-  border-left: 2px solid #040
+  border-left: 2px solid green
 }
 .sticky-bottom {
-  border-bottom: 2px solid #040
+  border-bottom: 2px solid green
 }
 
 #background .fire {

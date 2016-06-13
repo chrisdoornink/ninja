@@ -3,7 +3,10 @@ class Level {
     this.currentScene = 0
     this.start()
   }
-  start() {
+  start(scene) {
+    if (scene) {
+      this.currentScene = scene
+    }
     this.sceneAttempt = 1
     this.scenes[this.currentScene].build()
     this.preloadCharacterSprites()

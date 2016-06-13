@@ -473,8 +473,7 @@ class Character {
         let pos2 = this.coordinates || this.getCoordinates(this)
         let touching = this.compareCoordinates(pos,pos2)
         if (!touching.none) {
-          console.log('touching', solid);
-
+          level.scenes[level.currentScene][solid.action](solid)
         }
       }
     }

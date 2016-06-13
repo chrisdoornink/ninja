@@ -25,7 +25,7 @@ class Landscape {
     if (this.isBlind) {
       blinds.push(this)
     }
-    if (this.isBlind) {
+    if (this.isActionItem) {
       actionItems.push(this)
     }
     if (pos.bottom) {

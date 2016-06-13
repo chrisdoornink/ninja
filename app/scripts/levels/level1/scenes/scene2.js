@@ -40,7 +40,7 @@ class Scene2 extends Scene {
     this.ledges.push(new Landscape('door2', 'blind', {bottom: '322px', right: '480px',width: '30px', height: '50px'}))
 
     // this.baddies.push(new Baddie('Peter', 'baddie', 500, 500, {start: 'right', pattern: 'strict', range: [460, 850], waitTime: 5000}))
-    var bucket = new Landscape('bucket', 'bucket action-item', {bottom: '50px', left: '990px', width: '10px', height: '15px'})
+    var bucket = new Landscape('bucket', 'bucket action-item', {bottom: '50px', left: '990px', width: '10px', height: '15px', action: 'knockBucketOver'})
     var washedItem = new Landscape('washed-item', 'washed-item', {bottom: '50px', left: '1050px', width: '10px', height: '15px'})
     this.actionItems.push(bucket)
     this.ledges.push(washedItem)
@@ -58,5 +58,14 @@ class Scene2 extends Scene {
     //   console.log(baddieCounter);
     // }
     // setInterval (baddieGen, 500)
+  }
+  knockBucketOver(bucket) {
+    console.log('knock that bucket over!!!!');
+    if (bucket.knockedOver) {
+      return
+    }
+    bucket.knockedOver = true
+    document.getElementById('bucket').classList.add('knocked-over')
+    report.send('Bucket Knocked Over')
   }
 }

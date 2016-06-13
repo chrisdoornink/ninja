@@ -6,8 +6,10 @@ class Launderer extends Baddie {
     this.washedItem = options.washedItem
   }
   patrol() {
-    if (this.laundering || this.attackMode) {return}
+    if (this.laundering || this.attackMode || this.refilling) {return}
+    console.log('true');
     this.laundering = true
+    this.refilling = false
     this.washItem()
     this.lookAround()
   }
@@ -24,11 +26,15 @@ class Launderer extends Baddie {
     if ((this.bucket.position.x + this.bucket.width) < this.position.x) {
       this.leftStart()
     }
-    setTimeout(() => {
-      this.washItem()
-    }, 5000)
+
   }
-  refillWater() {}
+  refillWater() {
+    console.log('false');
+    this.laundering = false
+    this.refilling = true
+    //give confused look / dissapointment animation then...
+    this.rightStart()
+  }
   collisionDetection() {
     super.collisionDetection()
     if (this.laundering && this.washedItem.position.x <= (this.position.x + this.width)) {
@@ -36,6 +42,18 @@ class Launderer extends Baddie {
     }
     if (this.laundering && (this.bucket.position.x + this.bucket.width) >= this.position.x) {
       this.leftStop()
+      this.position.x = this.bucket.position.x + this.bucket.width + 1
+      if (this.bucket.knockedOver) {
+        this.refillWater()
+      } else {
+        setTimeout(() => {
+          console.log('wash');
+          this.washItem()
+        }, 5000)
+      }
+    }
+    if (this.refilling && this.position.x >= 1150) {
+      this.rightStop()
     }
   }
   see(obj) {
@@ -47,6 +65,7 @@ class Launderer extends Baddie {
   attack(obj) {
     console.log('launderng is false');
     this.laundering = false
+    this.refilling = false
     super.attack(obj)
   }
 }
