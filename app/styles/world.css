@@ -46,7 +46,7 @@ html, body {
   background: green;
 }
 
-.bucket {
+.bucket, .action-item {
   background: red;
 }
 .bucket.knocked-over {

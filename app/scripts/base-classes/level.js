@@ -7,6 +7,7 @@ class Level {
     if (scene) {
       this.currentScene = scene
     }
+    //should store sceneAttempt in localStorage, so refreshes will not mess this data up
     this.sceneAttempt = 1
     this.scenes[this.currentScene].build()
     this.preloadCharacterSprites()

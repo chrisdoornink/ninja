@@ -3,9 +3,11 @@ class Scene{
     this.ledges = []
     this.baddies = []
     this.sceneBackgrounds = []
-    this.actionItems= []
+    this.actionItems = []
+    this.timeouts = []
   }
   tearDown() {
+    this.tearingDown = true
     for (var i = 0; i < this.ledges.length; i++) {
       document.getElementById(this.ledges[i].name).remove()
       this.ledges[i] = null
@@ -29,5 +31,13 @@ class Scene{
       this.baddies[i].ceaseToExistPlease()
     }
     this.baddies = []
+    debugger
+    for (var i = 0; i < this.timeouts.length; i++) {
+      clearTimeout(this.timeouts[i])
+    }
+    this.timeouts = []
+  }
+  build() {
+    this.tearingDown = false
   }
 }

@@ -11,6 +11,11 @@ class Scene2 extends Scene {
 
   //alarm for more guys to come out of castle?
   build() {
+    super.build()
+    this.birdsScared = false
+
+    this.baddiesAlerted = false
+    floor = 550
     this.ledges.push(new Landscape('well1', 'ledge ', {bottom: '50px', right: '40px',width: '42px', height: '40px'})) //desgin appearances only
     this.ledges.push(new Landscape('house1', 'ledge ', {bottom: '55px', right: '180px',width: '122px', height: '120px'})) //desgin appearances only
     this.ledges.push(new Landscape('castle1', 'ledge ', {bottom: '55px', right: '440px',width: '180px', height: '140px'})) //desgin appearances only
@@ -34,38 +39,70 @@ class Scene2 extends Scene {
     this.ledges.push(new Landscape('castleRoof3', 'solid ledge sticky-bottom', {bottom: '430px', right: '350px',width: '362px', height: '10px'}))
     this.ledges.push(new Landscape('roof2', 'solid ledge', {bottom: '200px', left: '320px',width: '122px', height: '10px'}))
     this.ledges.push(new Landscape('roof3', 'solid ledge', {bottom: '200px', left: '120px',width: '122px', height: '10px'}))
-    this.ledges.push(new Landscape('treeBranch3', 'solid ledge sticky-bottom', {bottom: '290px', left: '0px',width: '122px', height: '10px'}))
+    this.ledges.push(new Landscape('treeBranch3', 'solid ledge sticky-bottom', {bottom: '290px', left: '0px',width: '122px', height: '10px', action: 'scareBirds'}))
     this.ledges.push(new Landscape('treeBranch4', 'solid ledge sticky-bottom', {bottom: '190px', left: '0px',width: '64px', height: '5px'}))
-    this.ledges.push(new Landscape('chimney2', 'solid ledge', {bottom: '200px', left: '380px',width: '22px', height: '40px'}))
-    this.ledges.push(new Landscape('door2', 'blind', {bottom: '322px', right: '480px',width: '30px', height: '50px'}))
+    this.ledges.push(new Landscape('chimney2', 'solid ledge', {bottom: '200px', left: '390px',width: '22px', height: '50px'}))
 
-    // this.baddies.push(new Baddie('Peter', 'baddie', 500, 500, {start: 'right', pattern: 'strict', range: [460, 850], waitTime: 5000}))
     var bucket = new Landscape('bucket', 'bucket action-item', {bottom: '50px', left: '990px', width: '10px', height: '15px', action: 'knockBucketOver'})
     var washedItem = new Landscape('washed-item', 'washed-item', {bottom: '50px', left: '1050px', width: '10px', height: '15px'})
     this.actionItems.push(bucket)
     this.ledges.push(washedItem)
+    this.baddies.push(new Baddie('Peter', 'baddie', 500, 500, {start: 'right', pattern: 'strict', range: [460, 800], waitTime: 4000}))
     this.baddies.push(new Launderer('Gary', 'baddie', 1000, 515, {start: 'laundry', bucket: bucket, washedItem: washedItem}))
-    // this.baddies.push(new Baddie('Mustafa', 'baddie', 500, 510, {start: 'left', pattern: 'strict', waitTime: 400}))
+    this.baddies.push(new Baddie('Mustafa', 'baddie', 600, 370, {start: 'right', pattern: 'strict', waitTime: 2000}))
+
     // this.baddies.push(new Baddie('Gordon', 'baddie', 930, 510, {start: 'sleeping'}))
     // this.baddies.push(new Baddie('Jerome', 'baddie', 1049, 295))
     // this.baddies.push(new Baddie('Brian', 'baddie', 1049, 345))
-    // var baddieCounter = 0
-    // function baddieGen() {
-    //   baddieCounter += 1
-    //
-    //   new Baddie('castle-multitude'+baddieCounter, 'baddie', 200, 400)
-    //   console.count('baddie');
-    //   console.log(baddieCounter);
-    // }
-    // setInterval (baddieGen, 500)
+
   }
-  knockBucketOver(bucket) {
-    console.log('knock that bucket over!!!!');
-    if (bucket.knockedOver) {
+  scareBirds() {
+    if (this.birdsScared) {
       return
     }
+    this.birdsScared = true
+    setTimeout(() => {
+      this.ledges.push(new Landscape('door2', 'blind next-scene', {bottom: '322px', right: '480px',width: '30px', height: '50px'}))
+      this.baddies.push(new Baddie('Clifford', 'baddie', 690, 250, {start: 'left', pattern: 'scareBirds', waitTime: 400}))
+    }, 3000)
+    report.send('Birds Scared')
+    console.log('congrats, bird hater.')
+  }
+  knockBucketOver(bucket) {
+    if (bucket.knockedOver) { return }
     bucket.knockedOver = true
-    document.getElementById('bucket').classList.add('knocked-over')
     report.send('Bucket Knocked Over')
+  }
+  alertBaddies() {
+    //stop this from triggering after a death
+    this.baddiesAlerted = true
+    let lowerTierBaddies = ['Chris', 'Cody', 'Chico', 'Matt', 'Ben', 'Dan', 'Stan', 'Steve', 'Jon', 'Jonas', 'Copper', 'Chandler', 'Carvel', 'Chester']
+    let upperTierBaddies = ['Dave', 'Aaron', 'Jester', 'Hugo']
+    var baddieCounter1 = 0
+    var baddieCounter2 = 0
+    let _this = this
+    this.ledges.push(new Landscape('door2', 'blind next-scene', {bottom: '322px', right: '480px',width: '30px', height: '50px'}))
+    function baddieGen1() {
+      if (_this.tearingDown) { return }
+      _this.baddies.push(new Baddie(lowerTierBaddies[baddieCounter1], 'baddie', 600, 515))
+      baddieCounter1++
+      if (baddieCounter1 < lowerTierBaddies.length) {
+        _this.timeouts.push(setTimeout(function () {
+          baddieGen1()
+        }, 500))
+      }
+    }
+    function baddieGen2() {
+      if (_this.tearingDown) { return }
+      _this.baddies.push(new Baddie(upperTierBaddies[baddieCounter2], 'baddie', 690, 250))
+      baddieCounter2++
+      if (baddieCounter2 < upperTierBaddies.length) {
+        _this.timeouts.push(setTimeout(function () {
+          baddieGen2()
+        }, 800))
+      }
+    }
+    baddieGen1()
+    baddieGen2()
   }
 }

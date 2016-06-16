@@ -1,5 +1,6 @@
 class Scene1 extends Scene{
   build() {
+    super.build()
     floor = 570
     this.sceneBackgrounds.push(new Background('facade', 'facades/scene1c', {position: {y: 0,x: 0},height: world.height, width: world.width}))
     this.sceneBackgrounds.push(new Background('fire', 'fire4', {position: {y: 462,x: 900}, height: 200, width: 200, animationClass: 'fire'}))
@@ -23,7 +24,7 @@ class Scene1 extends Scene{
     this.ledges.push(new Landscape('blind1', 'blind', {bottom: '30px', left: '504px',width: '25px', height: '50px'}))
     this.baddies.push(new Baddie('Sven', 'baddie', 500, 200, {start: 'right', pattern: 'strict'}))
     this.baddies.push(new Baddie('Grant', 'baddie', 400, 200, {start: 'left', pattern: 'strict'}))
-    this.baddies.push(new Baddie('Hunter', 'baddie', 500, 530, {start: 'left', pattern: 'strict', waitTime: 400}))
+    this.baddies.push(new Baddie('Hunter', 'baddie', 500, 530, {start: 'left', pattern: 'strict', range: [420, 700], waitTime: 2000}))
     this.baddies.push(new Baddie('Steve', 'baddie', 930, 530, {start: 'sleeping'}))
     this.baddies.push(new Baddie('Gunther', 'baddie', 1049, 295, {start: 'right', pattern: 'strict', waitTime: 2000}))
     this.baddies.push(new Baddie('Edward', 'baddie', 1049, 345, {start: 'right', pattern: 'strict', waitTime: 5000}))

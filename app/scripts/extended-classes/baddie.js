@@ -225,5 +225,8 @@ class Baddie extends Character {
         }
       }
     }
+    if (level.scenes[level.currentScene].alertBaddies && !level.scenes[level.currentScene].baddiesAlerted) {
+      level.scenes[level.currentScene].alertBaddies()
+    }
   }
 }

@@ -3,11 +3,11 @@ class Launderer extends Baddie {
     super.init(id, x, y)
     this.startingMove = 'laundry'
     this.bucket = options.bucket
+    this.initialBucketPosition = this.bucket.position
     this.washedItem = options.washedItem
   }
   patrol() {
     if (this.laundering || this.attackMode || this.refilling) {return}
-    console.log('true');
     this.laundering = true
     this.refilling = false
     this.washItem()
@@ -28,8 +28,11 @@ class Launderer extends Baddie {
     }
 
   }
+  putBucketBack() {
+    this.leftStart()
+    //might need something here and somewhere else to have the bucket attached to the guy
+  }
   refillWater() {
-    console.log('false');
     this.laundering = false
     this.refilling = true
     //give confused look / dissapointment animation then...
@@ -42,18 +45,30 @@ class Launderer extends Baddie {
     }
     if (this.laundering && (this.bucket.position.x + this.bucket.width) >= this.position.x) {
       this.leftStop()
-      this.position.x = this.bucket.position.x + this.bucket.width + 1
+      this.position.x = this.bucket.position.x + this.bucket.width + 5
       if (this.bucket.knockedOver) {
         this.refillWater()
       } else {
         setTimeout(() => {
-          console.log('wash');
           this.washItem()
         }, 5000)
       }
     }
-    if (this.refilling && this.position.x >= 1150) {
+    if (this.refilling && this.position.x >= 1111) {
+      this.position.x = 1110
       this.rightStop()
+      this.loweringAndRaising = true
+      setTimeout(() => {
+        this.loweringAndRaising = false;
+        this.putBucketBack()
+      }, 12000);
+      //do the well lowering stuff here.
+    }
+    if (this.refilling && this.position.x <= this.initialBucketPosition.x) {
+      this.leftStop()
+      this.refilling = false
+      this.laundering = true
+      this.bucket.knockedOver = false
     }
   }
   see(obj) {
@@ -63,7 +78,6 @@ class Launderer extends Baddie {
     }
   }
   attack(obj) {
-    console.log('launderng is false');
     this.laundering = false
     this.refilling = false
     super.attack(obj)

@@ -16,6 +16,7 @@ class Level1 extends Level{
     this.scenes = [new Scene1, new Scene2, new Scene3]
     this.level = '1'
     super.start(1)
+    // super.start()
     document.getElementById("world").className = 'devblocks'
   }
 }
