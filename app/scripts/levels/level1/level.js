@@ -1,22 +1,22 @@
 class Level1 extends Level{
   start() {
-    // let cloud6 = new Background('cloud6', 'clouds/bigcloud3', {opacity: .5, movement: 'sidescroll', speed: -.8, framerate: 80, height: 453, width: 1053, position: { x: 500, y: 0 }})
-    // let cloud7 = new Background('cloud7', 'clouds/bigcloud2', {opacity: .5, movement: 'sidescroll', speed: -.6, framerate: 80, height: 453, width: 1053, position: { x: 200, y: -100 }})
+    let cloud6 = new Background('cloud6', 'clouds/bigcloud3', {opacity: .5, movement: 'sidescroll', speed: .8, framerate: 80, height: 453, width: 1053, position: { x: -600, y: 200 }})
+    let cloud7 = new Background('cloud7', 'clouds/bigcloud2', {opacity: .4, movement: 'sidescroll', speed: 1, framerate: 80, height: 453, width: 1053, position: { x: -100, y: 150 }})
     // let mountains = new Background('mountains', 'mountains-beach7', {position: {y: 50,x: 0},height: world.height})
-    // let cloud1 = new Background('cloud1', 'clouds/bigcloud1', {opacity: .5, /*movement: 'sidescroll', speed: -.7, framerate: 80, */height: 453, width: 1053, position: { x: 900, y: -130 }})
-    // let cloud3 = new Background('cloud3', 'clouds/bigcloud3', {opacity: .5, movement: 'sidescroll', speed: -.6, framerate: 80, height: 453, width: 1053, position: { x: 200, y: -146 }})
-    // let cloud4 = new Background('cloud4', 'clouds/bigcloud4', {opacity: .5, /*movement: 'sidescroll', speed: -.5, framerate: 80, */height: 453, width: 1053, position: { x: 900, y: -200 }})
-    // let cloud5 = new Background('cloud5', 'clouds/bigcloud5', {opacity: .5, /*movement: 'sidescroll', speed: -.9, framerate: 80, */height: 453, width: 1053, position: { x: 0, y: -250 }})
-    // let watertiny = new Background('watertiny', 'tiny-waves4', { movement: 'roll', radius: 8, position: { x: -20, y: 478 }, framerate: 60, width: 1240, height: 47, speed: 0.14, start: -2.3})
-    // let waterlittle = new Background('waterlittle', 'little-waves', { movement: 'roll', radius: 9, position: { x: -20, y: 482 }, framerate: 60, width: 1240, height: 47, speed: 0.14, start: -1.8})
-    // let water0 = new Background('water0', 'waves12', { movement: 'roll', radius: 10, position: { x: -20, y: 486 }, framerate: 60, width: 1240, height: 47, speed: 0.14, start: -1.4})
-    // let water1 = new Background('water1', 'waves10', { movement: 'roll', radius: 12, position: { x: -20, y: 492 }, framerate: 60, width: 1240, height: 47, speed: 0.14, start: -1})
-    // let water2 = new Background('water2', 'waves9',  { movement: 'roll', radius: 16, position: { x: -20, y: 500 }, framerate: 60, width: 1240, height: 47, speed: 0.14, start: -0.5})
-    // let water3 = new Background('water3', 'waves7',  { movement: 'roll', radius: 22, position: { x: -20, y: 510 }, framerate: 60, width: 1240, height: 47, speed: 0.14})
+    let cloud1 = new Background('cloud1', 'clouds/bigcloud1', {opacity: .5, movement: 'sidescroll', speed: 1.7, framerate: 80, height: 453, width: 1053, position: { x: 900, y: -130 }})
+    let cloud3 = new Background('cloud3', 'clouds/bigcloud3', {opacity: .5, movement: 'sidescroll', speed: 1.6, framerate: 80, height: 453, width: 1053, position: { x: 200, y: -146 }})
+    let cloud4 = new Background('cloud4', 'clouds/bigcloud4', {opacity: .5, movement: 'sidescroll', speed: 1.5, framerate: 80, height: 453, width: 1053, position: { x: 900, y: -200 }})
+    let cloud5 = new Background('cloud5', 'clouds/bigcloud5', {opacity: .5, movement: 'sidescroll', speed: 1.9, framerate: 80, height: 453, width: 1053, position: { x: 0, y: -250 }})
+    let watertiny = new Background('watertiny', 'tiny-waves4', { movement: 'roll', radius: 8, position: { x: -20, y: 478 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14, start: -2.3})
+    let waterlittle = new Background('waterlittle', 'little-waves', { movement: 'roll', radius: 9, position: { x: -20, y: 482 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14, start: -1.8})
+    let water0 = new Background('water0', 'waves12', { movement: 'roll', radius: 10, position: { x: -20, y: 486 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14, start: -1.4})
+    let water1 = new Background('water1', 'waves10', { movement: 'roll', radius: 12, position: { x: -20, y: 492 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14, start: -1})
+    let water2 = new Background('water2', 'waves9',  { movement: 'roll', radius: 16, position: { x: -20, y: 500 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14, start: -0.5})
+    let water3 = new Background('water3', 'waves7',  { movement: 'roll', radius: 22, position: { x: -20, y: 510 }, framerate: 60, width: 1240, height: 47, actualSize: true, speed: 0.14})
     this.scenes = [new Scene1, new Scene2, new Scene3]
     this.level = '1'
-    // super.start(1)
-    super.start()
+    super.start(1)
+    // super.start()
     // document.getElementById("world").className = 'devblocks'
   }
 }
