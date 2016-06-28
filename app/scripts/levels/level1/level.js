@@ -15,9 +15,9 @@ class Level1 extends Level{
     // let water3 = new Background('water3', 'waves7',  { movement: 'roll', radius: 22, position: { x: -20, y: 510 }, framerate: 60, width: 1240, height: 47, speed: 0.14})
     this.scenes = [new Scene1, new Scene2, new Scene3]
     this.level = '1'
-    super.start(1)
-    // super.start()
-    document.getElementById("world").className = 'devblocks'
+    // super.start(1)
+    super.start()
+    // document.getElementById("world").className = 'devblocks'
   }
 }
 
