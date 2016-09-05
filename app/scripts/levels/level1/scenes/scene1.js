@@ -5,7 +5,7 @@ class Scene1 extends Scene{
     this.sceneBackgrounds.push(new Background('facade', 'facades/level2-test17', {position: {y: 0,x: 0},height: world.height, width: world.width}))
     this.sceneBackgrounds.push(new Background('fire', 'fire4', {position: {y: 442,x: 900}, height: 200, width: 200, animationClass: 'fire'}))
     this.sceneBackgrounds.push(new Background('drawbridge-and-lever', 'facades/level2-drawbridge/drawbridge-and-lever', {position: {y: 434,x: 766}, height: 166, width: 434, animationClass: 'drawbridge'}))
-    this.foreground = new Background('shrubs1', 'foreground-shrubs2', {position: {y: 15,x: 0},height: 600,foreground: true, sceneSpecific: true})
+    this.sceneBackgrounds.push(new Background('shrubs1', 'foreground-shrubs2', {position: {y: 15,x: 0},height: 600,foreground: true, sceneSpecific: true}))
     this.ledges.push(new Landscape('ledge0', 'solid ledge', {bottom: '30px', left: '-20px',width: '22px', height: '600px'}))
     this.ledges.push(new Landscape('ledge1', 'solid ledge', {bottom: '40px', left: '200px',width: '80px', height: '80px'}))
     this.ledges.push(new Landscape('ledge2', 'solid ledge sticky-right', {bottom: '40px', left: '320px',width: '40px', height: '152px'}))

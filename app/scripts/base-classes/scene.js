@@ -31,13 +31,15 @@ class Scene{
       this.baddies[i].ceaseToExistPlease()
     }
     this.baddies = []
-    debugger
+
     for (var i = 0; i < this.timeouts.length; i++) {
       clearTimeout(this.timeouts[i])
     }
     this.timeouts = []
   }
   build() {
-    this.tearingDown = false
+    setTimeout( () => {
+      this.tearingDown = false
+    }, 1000);
   }
 }

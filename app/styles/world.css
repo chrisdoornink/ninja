@@ -64,9 +64,9 @@ html, body {
   display: block;
 }
 
-#world.devblocks #landscape {
+/*#world.devblocks #landscape {
   background: #555;
-}
+}*/
 #world.devblocks #landscape .ledge, #world.devblocks #landscape .blind {
   display: block;
 }
