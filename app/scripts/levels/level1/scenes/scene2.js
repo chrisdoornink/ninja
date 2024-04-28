@@ -2,7 +2,7 @@ class Scene2 extends Scene {
   build() {
     super.build()
     this.birdsScared = false
-    document.getElementById('world').style.background = "linear-gradient(to bottom, #348 0%, #58a 70%)"
+    document.getElementById('world').className = 'sunset-transition'
     document.getElementById('foreground').style.background = "linear-gradient(to bottom, rgba(0,0,50,.1) 0%, rgba(0,0,50,.3) 70%)"
     this.baddiesAlerted = false
     floor = 550
@@ -31,7 +31,7 @@ class Scene2 extends Scene {
     this.ledges.push(new Landscape('chimney2', 'solid ledge', {bottom: '208px', left: '391px',width: '22px', height: '50px'}))
 
     var bucket = new Landscape('bucket', 'bucket action-item', {bottom: '50px', left: '990px', width: '10px', height: '15px', action: 'knockBucketOver'})
-    var washedItem = new Landscape('washed-item', 'washed-item', {bottom: '50px', left: '1050px', width: '10px', height: '15px'})
+    var washedItem = new Landscape('washed-item', 'washed-item', {bottom: '50px', left: '1150px', width: '10px', height: '15px'})
     this.actionItems.push(bucket)
     this.ledges.push(washedItem)
     this.baddies.push(new Baddie('Peter', 'baddie', 500, 500, {start: 'right', pattern: 'strict', range: [460, 800], waitTime: 4000}))
@@ -61,10 +61,10 @@ class Scene2 extends Scene {
     var baddieCounter1 = 0
     var baddieCounter2 = 0
     let _this = this
-    this.ledges.push(new Landscape('door2', 'blind next-scene', {bottom: '322px', right: '480px',width: '30px', height: '50px'}))
+    this.ledges.push(new Landscape('doorCastleTop', 'blind next-scene', {bottom: '322px', right: '514px',width: '30px', height: '50px'}))
     function baddieGen1() {
       if (_this.tearingDown) { return }
-      _this.baddies.push(new Baddie(lowerTierBaddies[baddieCounter1], 'baddie', 600, 515))
+      _this.baddies.push(new Baddie(lowerTierBaddies[baddieCounter1], 'baddie', 660, 515))
       baddieCounter1++
       if (baddieCounter1 < lowerTierBaddies.length) {
         _this.timeouts.push(setTimeout(function () {
@@ -74,7 +74,7 @@ class Scene2 extends Scene {
     }
     function baddieGen2() {
       if (_this.tearingDown) { return }
-      _this.baddies.push(new Baddie(upperTierBaddies[baddieCounter2], 'baddie', 690, 250))
+      _this.baddies.push(new Baddie(upperTierBaddies[baddieCounter2], 'baddie', 660, 250))
       baddieCounter2++
       if (baddieCounter2 < upperTierBaddies.length) {
         _this.timeouts.push(setTimeout(function () {

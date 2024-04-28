@@ -12,7 +12,7 @@ html, body {
   margin: 0px auto;
   overflow: hidden;
   /*background: linear-gradient(to bottom, #7da7be, #878cb1); //dusk*/
-  background: linear-gradient(to bottom, #9be2fe 0%, #67d1fb 70%); //day
+  background: linear-gradient(to bottom, #9be2fe 0%, #67d1fb 70%);
   /*background: linear-gradient(to bottom, #244970, #ae9d4e); //nighttime*/
   transform: translate3d(0,0,0);
 }
@@ -95,4 +95,47 @@ html, body {
 
 @keyframes drawbridgeLower {
   100% { background-position: -5208px; }
+}
+
+@keyframes sunset {
+  0%, 20% {
+    background: linear-gradient(to bottom, #87CEEB, #f0e68c); /* light blue to light yellow (day) */
+  }
+  40%, 60% {
+    background: linear-gradient(to bottom, #FFD700, #FF4500); /* gold to orange-red (sunset) */
+  }
+  80%, 100% {
+    background: linear-gradient(to bottom, #00004d, #000000); /* dark blue to black (night) */
+  }
+}
+
+/* This is intended to start when its becoming night, so it quickly transitions to nighttime and stays that way before trannsitioning more slowly to day later */
+@keyframes dayToNightToDay {
+  0%, 10% {
+    opacity: 0; /* Day visible, night hidden */
+  }
+  10%, 80% {
+    opacity: 1; /* Day hidden, night visible */
+  }
+  80%, 100% {
+    opacity: 0; /* Day visible, night hidden */
+  }
+}
+
+
+#world.sunset-transition {
+  background: linear-gradient(to bottom, #87CEEB, #f0e68c)
+}
+
+#world.sunset-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #000045, #000000) !important;
+  z-index: -1;
+  opacity: 0;
+  animation: dayToNightToDay 600s ease-in-out;
 }
