@@ -1,5 +1,5 @@
 //global variables
-let floor = 570
+let floor = 555
 const world = {height: 600, width: 1200}
 let solids = []
 let blinds = []

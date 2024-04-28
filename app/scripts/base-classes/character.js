@@ -1,5 +1,6 @@
 class Character {
   constructor(id, classes, x, y, options) {
+    console.log('character constructor', options)
     this.name = id
     this.init(id,x,y,options)
     this.div = document.createElement("DIV")
@@ -32,7 +33,7 @@ class Character {
     this.setPosition({x:this.initialPosition.x,y:this.initialPosition.y})
     this.start()
   }
-  init(id, x, y) {
+  init(id, x, y, _options) {
     this.name = id
     this.position = {x:x,y:y}
     this.initialPosition = this.position

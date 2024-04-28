@@ -1,6 +1,6 @@
 class Launderer extends Baddie {
   init(id, x, y, options = {}) {
-    super.init(id, x, y)
+    super.init(id, x, y, options)
     this.startingMove = 'laundry'
     this.bucket = options.bucket
     this.washedItem = options.washedItem
