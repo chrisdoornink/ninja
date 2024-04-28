@@ -13,6 +13,7 @@ class Baddie extends Character {
     this.pattern = options.pattern || 'random'
     this.waitTime = options.waitTime || 2000
     this.range = options.range
+    this.seeAction = options.seeAction
   }
   start() {
     if (this.startingMove == 'left') {
@@ -179,6 +180,9 @@ class Baddie extends Character {
       } else if (!this.sleeping) {
         setTimeout(() => {
           this.attack(obj)
+          if (this.seeAction) {
+            this.seeAction()
+          }
         }, 200)
       }
     }

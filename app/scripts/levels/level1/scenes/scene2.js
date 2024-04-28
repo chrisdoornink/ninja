@@ -9,7 +9,7 @@ class Scene2 extends Scene {
     this.sceneBackgrounds.push(new Background('facade', 'facades/Level1Scene2Test4', {position: {y: 0,x: 0},height: world.height, width: world.width}))
     this.sceneBackgrounds.push(new Background('facade', 'facades/Level1Scene2Foreground', {position: {y: 0,x: 0},height: world.height, width: world.width,foreground: true}))
     this.sceneBackgrounds.push(new Background('shrubs1', 'foreground-shrubs2', {position: {y: 15,x: 0},height: 600,foreground: true, sceneSpecific: true}))
-    this.ledges.push(new Landscape('sceneWallLeft', 'solid ledge sticky-right', {bottom: '50px', left: '-18px',width: '22px', height: '600px'}))
+    this.ledges.push(new Landscape('sceneWallLeft', 'solid ledge', {bottom: '50px', left: '-20px',width: '22px', height: '600px'}))
     this.ledges.push(new Landscape('sceneWallRight', 'solid ledge', {bottom: '50px', right: '-20px',width: '22px', height: '600px'}))
     this.ledges.push(new Landscape('treeBranch1', 'solid ledge sticky-left', {bottom: '130px', right: '70px',width: '22px', height: '100px'}))
     this.ledges.push(new Landscape('treeBranch2', 'solid ledge sticky-bottom', {bottom: '230px', right: '70px',width: '122px', height: '10px'}))
