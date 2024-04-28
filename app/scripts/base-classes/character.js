@@ -1,6 +1,5 @@
 class Character {
   constructor(id, classes, x, y, options) {
-    console.log('character constructor', options)
     this.name = id
     this.init(id,x,y,options)
     this.div = document.createElement("DIV")
